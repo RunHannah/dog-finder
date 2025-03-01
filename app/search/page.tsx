@@ -1,9 +1,7 @@
-"use client";
-
-import withAuth from "@/components/WithAuth";
+"use server";
 
 function SearchPage() {
   return <div>Search page</div>;
 }
 
-export default withAuth(SearchPage);
+export default SearchPage;
