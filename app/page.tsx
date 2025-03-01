@@ -1,3 +1,9 @@
+"use client";
+
 export default function Home() {
-  return <div>Fetch dogs</div>;
+  return (
+    <main>
+      <div>Hello Dogs</div>
+    </main>
+  );
 }
