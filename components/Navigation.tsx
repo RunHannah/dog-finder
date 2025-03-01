@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import LoginLink from "./LoginLink";
 import LogoutButton from "./LogoutButton";
 
-export default async function AuthNav() {
+export default async function Navigation() {
   const cookieStore = await cookies();
   const isAuthenticated = !!cookieStore.get("session");
 
