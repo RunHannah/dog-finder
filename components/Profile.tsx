@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { DogProfile } from "@/types/Dog";
+import { DogProfile } from "@/types/Search";
 
 export default function Profile({
   id,

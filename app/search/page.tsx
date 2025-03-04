@@ -1,44 +1,37 @@
 "use client";
-import { useEffect, useState } from "react";
-import { searchDogs, fetchDogsByIds } from "@/actions/dogs";
+import { useState } from "react";
 import Profile from "@/components/Profile";
-import { DogProfile } from "@/types/Dog";
+import { SortCategory, SortOrder } from "@/types/Search";
+import { useSearch } from "@/hooks/useSearch";
 
 function SearchPage() {
-  const [dogIds, setDogIds] = useState<string[]>([]);
-  const [dogProfiles, setDogProfiles] = useState<DogProfile[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [breeds, setBreeds] = useState("");
+  // Filtering
+  const [ageMin, setAgeMin] = useState<number | null>(null);
+  const [ageMax, setAgeMax] = useState<number | null>(null);
+  const [location, setLocation] = useState<string>("");
+  const [zipCodes, setZipCodes] = useState<string[]>([]);
+  // Pagination
+  const [page, setPage] = useState(0);
+  // Sorting
+  const [sortCategory, setSortCategory] = useState<SortCategory>("breed");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+  // Selection
+  const [selectedBreed, setSelectedBreed] = useState<string>("");
 
-  useEffect(() => {
-    const getDogs = async () => {
-      try {
-        const data = await searchDogs();
-        setDogIds(data.resultIds);
-      } catch (error) {
-        console.log("error", error);
-        setError("Failed to fetch dog IDs");
-      }
-    };
-    getDogs();
-  }, []);
+  const { dogProfiles, totalPages, error, isLoading } = useSearch({
+    ageMax,
+    ageMin,
+    page,
+    selectedBreed,
+    sortCategory,
+    sortOrder,
+    zipCodes,
+  });
 
-  useEffect(() => {
-    const getDogsByIds = async () => {
-      try {
-        const data = await fetchDogsByIds(dogIds);
-        setDogProfiles(data);
-      } catch (error) {
-        console.log("error", error);
-        setError("Failed to fetchDogsByIds");
-      }
-    };
-    if (dogIds.length) {
-      getDogsByIds();
-    }
-  }, [dogIds]);
-
-  console.log("dogsIds", dogIds.length);
-  console.log("dogProfiles", dogProfiles.length);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
