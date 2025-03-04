@@ -1,11 +1,13 @@
+import { useState, useEffect } from "react";
+
 interface FilterMenuProps {
   breeds: string[];
   selectedBreed: string;
   setSelectedBreed: (value: string) => void;
   ageMin: number | null;
-  setAgeMin: (value: number | null) => void;
+  getAgeMin: (value: number | null) => void;
   ageMax: number | null;
-  setAgeMax: (value: number | null) => void;
+  getAgeMax: (value: number | null) => void;
 }
 
 export default function FilterMenu({
@@ -13,10 +15,33 @@ export default function FilterMenu({
   selectedBreed,
   setSelectedBreed,
   ageMin,
-  setAgeMin,
+  getAgeMin,
   ageMax,
-  setAgeMax,
+  getAgeMax,
 }: FilterMenuProps) {
+  const [min, setMin] = useState<number | null>(null);
+  const [max, setMax] = useState<number | null>(null);
+  const [error, setError] = useState("");
+  const ageRange = Array.from({ length: 16 }, (_, index) => index);
+
+  const handleAgeFilter = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    type: "ageMin" | "ageMax"
+  ) => {
+    if (type === "ageMin") setMin(Number(e.target.value));
+    if (type === "ageMax") setMax(Number(e.target.value));
+  };
+
+  useEffect(() => {
+    if (min !== null && max !== null && min > max) {
+      setError(`Please select a minimum age less than ${max}`);
+    } else {
+      getAgeMin(min);
+      getAgeMax(max);
+      setError("");
+    }
+  }, [min, max, getAgeMin, getAgeMax]);
+
   return (
     <div className="flex flex-col lg:flex-row">
       {/* Breeds */}
@@ -42,36 +67,45 @@ export default function FilterMenu({
       {/* Age - min */}
       <div className="flex flex-col m-2">
         <label htmlFor="age-min">Age: Minimum</label>
-        <input
-          className="outline-2 outline-purple-950 my-2 p-2 h-[55px]"
+        <select
+          className="outline-2 outline-purple-950 my-2 p-2 h-[55px] hover:cursor-pointer"
           id="age-min"
           name="age-min"
-          min={0}
-          max={20}
-          placeholder="min age: 0"
           value={ageMin || ""}
-          onChange={(e) =>
-            setAgeMin(e.target.value ? Number(e.target.value) : null)
-          }
-        />
+          onChange={(e) => handleAgeFilter(e, "ageMin")}
+        >
+          <option value="">minimum age</option>
+          {ageRange.map((age) => (
+            <option key={age} value={age}>
+              {age}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Age - max */}
       <div className="flex flex-col m-2">
         <label htmlFor="age-max">Age: Maximum</label>
-        <input
-          className="outline-2 outline-purple-950 my-2 p-2 h-[55px]"
+        <select
+          className="outline-2 outline-purple-950 my-2 p-2 h-[55px] hover:cursor-pointer"
           id="age-max"
           name="age-max"
-          min={0}
-          max={15}
-          placeholder="max age: 15"
           value={ageMax || ""}
-          onChange={(e) =>
-            setAgeMax(e.target.value ? Number(e.target.value) : null)
-          }
-        />
+          onChange={(e) => handleAgeFilter(e, "ageMax")}
+        >
+          <option value="">maximum age</option>
+          {ageRange.map((age) => (
+            <option key={age} value={age}>
+              {age}
+            </option>
+          ))}
+        </select>
       </div>
+      {error && (
+        <p className="text-sm text-red-700 font-bold flex items-end m-2 p-2">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
