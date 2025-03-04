@@ -17,15 +17,17 @@ export default function Profile({
 }: DogProfile) {
   return (
     <Card key={id} className="max-w-xs mx-auto pt-0">
-      <div className="w-[250px] h-[250px] overflow-hidden relative">
+      <div className="w-[250px] h-[250px] overflow-hidden relative flex items-center justify-center">
         <Image
           className="rounded-tl-xl rounded-tr-xl"
           src={img}
-          width={250}
-          height={250}
-          layout="intrinsic"
-          objectFit="cover"
           alt={breed}
+          fill
+          sizes="(max-width: 250px) 100vw"
+          style={{
+            objectPosition: "center",
+            objectFit: "cover",
+          }}
         />
       </div>
       <CardHeader>

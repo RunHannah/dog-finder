@@ -29,9 +29,9 @@ export default function LocationSearch({ setLocation }: LocationSearchProps) {
   }, [debouncedValue]);
 
   return (
-    <div className="w-full flex items-center bg-purple-900">
+    <div className="w-full bg-purple-900">
       <input
-        className="h-14 mx-auto py-2.5 text-white font-bold"
+        className="h-14 mx-auto my-2.5 p-2.5 text-white font-bold border-2 w-96"
         type="string"
         value={inputValue}
         placeholder="Enter City, State, or Zip"
