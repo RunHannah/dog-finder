@@ -1,20 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Profile from "@/components/Profile";
+import Grid from "@/components/Grid";
+import LocationSearch from "@/components/LocationSearch";
+import FilterMenu from "@/components/FilterMenu";
+import SortMenu from "@/components/SortMenu";
 import { SortCategory, SortOrder } from "@/types/Search";
 import { useSearch } from "@/hooks/useSearch";
+import { getBreeds } from "@/actions/dogs";
 
 function SearchPage() {
-  const [breeds, setBreeds] = useState("");
+  const [breeds, setBreeds] = useState<string[]>([]);
   // Filtering
   const [ageMin, setAgeMin] = useState<number | null>(null);
   const [ageMax, setAgeMax] = useState<number | null>(null);
   const [location, setLocation] = useState<string>("");
-  const [zipCodes, setZipCodes] = useState<string[]>([]);
+  // const [zipCode, setZipCode] = useState<string[]>([]);
   // Pagination
   const [page, setPage] = useState(0);
   // Sorting
-  const [sortCategory, setSortCategory] = useState<SortCategory>("breed");
+  const [sortCategory, setSortCategory] = useState<SortCategory>("age");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
   // Selection
   const [selectedBreed, setSelectedBreed] = useState<string>("");
@@ -26,8 +31,16 @@ function SearchPage() {
     selectedBreed,
     sortCategory,
     sortOrder,
-    zipCodes,
+    zipCode: location,
   });
+
+  useEffect(() => {
+    const fetchBreeds = async () => {
+      const result = await getBreeds();
+      setBreeds(result);
+    };
+    fetchBreeds();
+  }, []);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -35,26 +48,42 @@ function SearchPage() {
 
   return (
     <div>
-      <h1>Search page</h1>
+      <h1>Dog Finder</h1>
+      <LocationSearch setLocation={setLocation} />
       {error && <div>{error}</div>}
-      {dogProfiles.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 max-w-[1400px] m-auto mb-8">
-          {dogProfiles.map((profile) => {
-            const { id, img, name, breed, age, zip_code } = profile;
-            return (
-              <Profile
-                key={id}
-                id={id}
-                img={img}
-                breed={breed}
-                name={name}
-                age={age}
-                zip_code={zip_code}
-              />
-            );
-          })}
+
+      <div>
+        <div className="flex flex-row justify-center lg:justify-between items-end">
+          <FilterMenu
+            breeds={breeds}
+            selectedBreed={selectedBreed}
+            setSelectedBreed={setSelectedBreed}
+            ageMin={ageMin}
+            setAgeMin={setAgeMin}
+            ageMax={ageMax}
+            setAgeMax={setAgeMax}
+          />
+          <SortMenu setSortOrder={setSortOrder} />
         </div>
-      )}
+        {dogProfiles.length > 0 && (
+          <Grid>
+            {dogProfiles.map((profile) => {
+              const { id, img, name, breed, age, zip_code } = profile;
+              return (
+                <Profile
+                  key={id}
+                  id={id}
+                  img={img}
+                  breed={breed}
+                  name={name}
+                  age={age}
+                  zip_code={zip_code}
+                />
+              );
+            })}
+          </Grid>
+        )}
+      </div>
     </div>
   );
 }

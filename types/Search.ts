@@ -15,14 +15,14 @@ export interface SearchParams {
   breeds: string[];
   size: number;
   from: number;
-  zipCodes: string[];
+  zipCode: string;
   ageMin: number | null;
   ageMax: number | null;
   sort: unknown;
 }
 
 export interface SearchFilter
-  extends Pick<SearchParams, "zipCodes" | "ageMin" | "ageMax"> {
+  extends Pick<SearchParams, "zipCode" | "ageMin" | "ageMax"> {
   page: number;
   selectedBreed: string;
   sortCategory: SortCategory;

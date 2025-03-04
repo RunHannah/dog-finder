@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fetch dogs",
-  description: "An app to search dogs available for adoption",
+  title: "Dog Finder",
+  description: "An app to find dogs available for adoption",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-purple-50`}
       >
         <Navigation />
         {children}

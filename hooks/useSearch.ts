@@ -3,7 +3,7 @@ import { searchDogs, fetchDogsByIds } from "@/actions/dogs";
 import { DogProfile, SearchFilter } from "@/types/Search";
 
 export const useSearch = ({
-  zipCodes,
+  zipCode,
   ageMin,
   ageMax,
   page,
@@ -23,7 +23,7 @@ export const useSearch = ({
         breeds: selectedBreed ? [selectedBreed] : [],
         size: 25,
         from: page * 25,
-        zipCodes,
+        zipCode,
         ageMin: ageMin,
         ageMax: ageMax,
         sort: `${sortCategory}:${sortOrder}`,
@@ -46,7 +46,7 @@ export const useSearch = ({
 
   useEffect(() => {
     search();
-  }, [ageMax, ageMin, page, selectedBreed, sortCategory, sortOrder, zipCodes]);
+  }, [ageMax, ageMin, page, selectedBreed, sortCategory, sortOrder, zipCode]);
 
   return { dogProfiles, totalPages, error, isLoading };
 };

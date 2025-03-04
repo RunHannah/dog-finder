@@ -9,7 +9,7 @@ export async function getBreeds() {
       credentials: "include",
     });
 
-    const data = await response.json();
+    const data: string[] = await response.json();
     return data;
   } catch (error) {
     console.error("Failed to search dogs", error);
@@ -20,7 +20,7 @@ export async function getBreeds() {
 // will return an array of dogs ids: resultIds[]
 export async function searchDogs({
   breeds,
-  zipCodes,
+  zipCode,
   ageMin,
   ageMax,
   size,
@@ -34,12 +34,10 @@ export async function searchDogs({
     if (breeds && breeds.length > 0) {
       queryParams.append("breeds", breeds.join(","));
     }
-    if (zipCodes && zipCodes.length > 0) {
-      queryParams.append("zipCodes", zipCodes.join(","));
-    }
 
+    if (zipCode) queryParams.append("zip_code", zipCode.toString());
     if (ageMin) queryParams.append("ageMin", ageMin.toString());
-    if (ageMax) queryParams.append("ageMaz", ageMax.toString());
+    if (ageMax) queryParams.append("ageMax", ageMax.toString());
     if (size) queryParams.append("size", size.toString());
     if (from) queryParams.append("from", from.toString());
     if (sort) queryParams.append("sort", sort.toString());
