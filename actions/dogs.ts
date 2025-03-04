@@ -1,0 +1,41 @@
+// will return an array of dogs ids: resultIds[]
+export async function searchDogs() {
+  try {
+    const response = await fetch(
+      "https://frontend-take-home-service.fetch.com/dogs/search",
+      {
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to search dogs", error);
+    throw error;
+  }
+}
+
+export async function fetchDogsByIds(ids: string[]) {
+  const idsLimit = ids.slice(0, 100); // max 100 ids
+  try {
+    const response = await fetch(
+      "https://frontend-take-home-service.fetch.com/dogs",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(idsLimit),
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to getDogsByIds", error);
+    throw error;
+  }
+}

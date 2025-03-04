@@ -7,8 +7,12 @@ export default function LogoutButton() {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await logout();
-    router.refresh();
+    try {
+      await logout();
+      router.refresh();
+    } catch (error) {
+      console.error("Failed to logout", error);
+    }
   };
 
   return (
