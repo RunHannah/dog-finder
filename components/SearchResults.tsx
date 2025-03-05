@@ -1,4 +1,5 @@
 import { useSearch } from "@/hooks/useSearch";
+import { Skeleton } from "@/components/ui/skeleton";
 import Profile from "@/components/Profile";
 import Grid from "@/components/Grid";
 import { SearchFilter } from "@/types/Search";
@@ -35,11 +36,21 @@ export default function SearchResults({
   }, [totalPages, getTotalPages]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        {isLoading && (
+          <Grid>
+            {Array.from({ length: 25 }).map((_, index) => (
+              <Skeleton key={index} className="h-[400px] w-[250px] m-auto" />
+            ))}
+          </Grid>
+        )}
+      </>
+    );
   }
 
   if (error) {
-    return <p className="text-red-600 font-bold">{error}</p>;
+    return <p className="text-red-600 font-bold text-center">{error}</p>;
   }
 
   return (
