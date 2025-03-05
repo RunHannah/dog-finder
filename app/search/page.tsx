@@ -6,6 +6,7 @@ import SortMenu from "@/components/SortMenu";
 import { SortCategory, SortOrder } from "@/types/Search";
 import { getBreeds } from "@/actions/dogs";
 import SearchResults from "@/components/SearchResults";
+import PaginationControls from "@/components/PaginationControls";
 
 function SearchPage() {
   const [breeds, setBreeds] = useState<string[]>([]);
@@ -16,9 +17,7 @@ function SearchPage() {
   // const [zipCode, setZipCode] = useState<string[]>([]);
   // Pagination
   const [page, setPage] = useState(0);
-  const [totalPagesAvailable, setTotalPagesAvailable] = useState<number | null>(
-    null
-  );
+  const [totalPages, setTotalPages] = useState<number>(0);
   // Sorting
   const [sortCategory, setSortCategory] = useState<SortCategory>("age");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
@@ -33,8 +32,8 @@ function SearchPage() {
     fetchBreeds();
   }, []);
 
-  const getTotalPages = useCallback((value: number | null) => {
-    setTotalPagesAvailable(value);
+  const getTotalPages = useCallback((value: number) => {
+    setTotalPages(value);
   }, []);
 
   const getAgeMin = useCallback((value: number | null) => {
@@ -73,6 +72,11 @@ function SearchPage() {
           getTotalPages={getTotalPages}
         />
       </div>
+      <PaginationControls
+        currentPage={page}
+        totalPages={totalPages}
+        setPage={setPage}
+      />
     </div>
   );
 }

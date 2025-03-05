@@ -5,7 +5,7 @@ import { SearchFilter } from "@/types/Search";
 import { useEffect } from "react";
 
 interface SearchResultsProps extends SearchFilter {
-  getTotalPages: (value: number | null) => void;
+  getTotalPages: (value: number) => void;
 }
 
 export default function SearchResults({

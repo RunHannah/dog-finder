@@ -1,3 +1,5 @@
+"server only";
+
 import { SearchParams } from "@/types/Search";
 
 const url = "https://frontend-take-home-service.fetch.com";

@@ -34,7 +34,7 @@ export function LoginForm() {
       {state?.errors?.email && <p>{state.errors.email}</p>}
 
       <button
-        className="bg-green-700 hover:cursor-pointer text-white px-4 py-2"
+        className="bg-purple-800 hover:cursor-pointer text-white px-4 py-2"
         disabled={pending}
         type="submit"
       >
