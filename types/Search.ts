@@ -28,3 +28,9 @@ export interface SearchFilter
   sortCategory: SortCategory;
   sortOrder: SortOrder;
 }
+
+export const SORT_CATEGORIES = {
+  breed: "breed",
+  age: "age",
+  name: "name",
+} as const;

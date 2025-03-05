@@ -3,20 +3,20 @@ import { useState, useEffect } from "react";
 interface FilterMenuProps {
   breeds: string[];
   selectedBreed: string;
-  setSelectedBreed: (value: string) => void;
   ageMin: number | null;
-  getAgeMin: (value: number | null) => void;
   ageMax: number | null;
+  setSelectedBreed: (value: string) => void;
+  getAgeMin: (value: number | null) => void;
   getAgeMax: (value: number | null) => void;
 }
 
 export default function FilterMenu({
   breeds,
   selectedBreed,
-  setSelectedBreed,
   ageMin,
-  getAgeMin,
   ageMax,
+  setSelectedBreed,
+  getAgeMin,
   getAgeMax,
 }: FilterMenuProps) {
   const [min, setMin] = useState<number | null>(null);
@@ -43,68 +43,68 @@ export default function FilterMenu({
   }, [min, max, getAgeMin, getAgeMax]);
 
   return (
-    <div className="flex flex-col lg:flex-row">
-      {/* Breeds */}
-      <div className="flex flex-col m-2">
-        <label htmlFor="breed-select">Breed</label>
-        <select
-          className="outline-2 outline-purple-950 my-2 p-2 h-[55px] hover:cursor-pointer"
-          id="breed-select"
-          name="breeds"
-          value={selectedBreed}
-          onChange={(e) => setSelectedBreed(e.target.value)}
-        >
-          <option value="">Choose a breed</option>
-          {breeds.length > 0 &&
-            breeds.map((breed) => (
-              <option key={breed} value={breed}>
-                {breed}
+    <div className="flex flex-col">
+      <div className="flex flex-col lg:flex-row">
+        {/* Breeds */}
+        <div className="flex flex-col m-2">
+          <label htmlFor="breed-select">Breed</label>
+          <select
+            className="border-2 border-purple-950 my-2 p-2 h-[55px]"
+            id="breed-select"
+            name="breeds"
+            value={selectedBreed}
+            onChange={(e) => setSelectedBreed(e.target.value)}
+          >
+            <option value="">Choose a breed</option>
+            {breeds.length > 0 &&
+              breeds.map((breed) => (
+                <option key={breed} value={breed}>
+                  {breed}
+                </option>
+              ))}
+          </select>
+        </div>
+
+        {/* Age - min */}
+        <div className="flex flex-col m-2">
+          <label htmlFor="age-min">Age: Minimum</label>
+          <select
+            className="border-2 border-purple-950 my-2 p-2 h-[55px]"
+            id="age-min"
+            name="age-min"
+            value={ageMin || ""}
+            onChange={(e) => handleAgeFilter(e, "ageMin")}
+          >
+            <option value="">minimum age</option>
+            {ageRange.map((age) => (
+              <option key={age} value={age}>
+                {age}
               </option>
             ))}
-        </select>
-      </div>
+          </select>
+        </div>
 
-      {/* Age - min */}
-      <div className="flex flex-col m-2">
-        <label htmlFor="age-min">Age: Minimum</label>
-        <select
-          className="outline-2 outline-purple-950 my-2 p-2 h-[55px] hover:cursor-pointer"
-          id="age-min"
-          name="age-min"
-          value={ageMin || ""}
-          onChange={(e) => handleAgeFilter(e, "ageMin")}
-        >
-          <option value="">minimum age</option>
-          {ageRange.map((age) => (
-            <option key={age} value={age}>
-              {age}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Age - max */}
-      <div className="flex flex-col m-2">
-        <label htmlFor="age-max">Age: Maximum</label>
-        <select
-          className="outline-2 outline-purple-950 my-2 p-2 h-[55px] hover:cursor-pointer"
-          id="age-max"
-          name="age-max"
-          value={ageMax || ""}
-          onChange={(e) => handleAgeFilter(e, "ageMax")}
-        >
-          <option value="">maximum age</option>
-          {ageRange.map((age) => (
-            <option key={age} value={age}>
-              {age}
-            </option>
-          ))}
-        </select>
+        {/* Age - max */}
+        <div className="flex flex-col m-2">
+          <label htmlFor="age-max">Age: Maximum</label>
+          <select
+            className="border-2 border-purple-950 my-2 p-2 h-[55px]"
+            id="age-max"
+            name="age-max"
+            value={ageMax || ""}
+            onChange={(e) => handleAgeFilter(e, "ageMax")}
+          >
+            <option value="">maximum age</option>
+            {ageRange.map((age) => (
+              <option key={age} value={age}>
+                {age}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       {error && (
-        <p className="text-sm text-red-700 font-bold flex items-end m-2 p-2">
-          {error}
-        </p>
+        <p className="text-sm text-red-700 font-bold mb-2 p-2">{error}</p>
       )}
     </div>
   );
