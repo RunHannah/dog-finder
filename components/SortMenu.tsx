@@ -23,7 +23,7 @@ export default function SortMenu({
         <label htmlFor="sort-category">Sort By</label>
         <select
           name="sort-category"
-          className="border-2 border-purple-950 mr-2 my-2 p-2 h-[55px] bg-whte text-purple-900 w-[170px]"
+          className="border-2 border-purple-950 mr-2 my-2 p-2 h-[55px] bg-white text-purple-900 w-[170px]"
           onChange={handleCategoryChange}
         >
           <option value="">Select a category</option>
@@ -36,14 +36,14 @@ export default function SortMenu({
       </div>
       <Button
         variant={"outline"}
-        className="border-purple-900 border-2 bg-whte text-purple-900 m-2 p-2 h-[55px] w-[100px] hover:bg-purple-900 hover:cursor-pointer hover:text-white"
+        className="border-purple-900 border-2 bg-white text-purple-900 m-2 p-2 h-[55px] w-[100px] hover:bg-purple-900 hover:cursor-pointer hover:text-white"
         onClick={() => setSortOrder("asc")}
       >
         Asc
       </Button>
       <Button
         variant={"outline"}
-        className="border-purple-900 border-2 bg-whte text-purple-900 m-2 p-2 h-[55px] w-[100px] hover:bg-purple-900 hover:cursor-pointer hover:text-white"
+        className="border-purple-900 border-2 bg-white text-purple-900 m-2 p-2 h-[55px] w-[100px] hover:bg-purple-900 hover:cursor-pointer hover:text-white"
         onClick={() => setSortOrder("desc")}
       >
         Desc

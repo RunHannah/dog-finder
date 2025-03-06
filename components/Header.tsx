@@ -3,16 +3,16 @@ import { cookies } from "next/headers";
 import LoginLink from "./LoginLink";
 import LogoutButton from "./LogoutButton";
 
-export default async function Navigation() {
+export default async function Header() {
   const cookieStore = await cookies();
   const isAuthenticated = !!cookieStore.get("session");
 
   return (
-    <nav className="flex flex-row justify-end">
-      <Link className="ml-2 mr-2" href="/">
-        Home
+    <header className="flex flex-row justify-between">
+      <Link className="font-logo text-4xl m-2 text-purple-900" href="/">
+        dog finder
       </Link>
       {isAuthenticated ? <LogoutButton /> : <LoginLink />}
-    </nav>
+    </header>
   );
 }

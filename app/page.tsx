@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import PetCard from "@/components/PetCard";
 
@@ -38,7 +37,7 @@ export default function Home() {
         <div className="my-10 text-center text-2xl text-purple-900 font-bold">
           <p>Dogs Available for Adoption Nearby</p>
         </div>
-        <div className="flex flex-row justify-evenly mb-10">
+        <div className="flex flex-col md:flex-row items-center justify-evenly mb-10">
           {pets.map((pet) => (
             <PetCard
               key={pet.name}

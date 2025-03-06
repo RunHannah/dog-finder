@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Navigation from "@/components/Navigation";
+import { Geist, Geist_Mono, Mystery_Quest } from "next/font/google";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
@@ -12,6 +12,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const mysteryQuest = Mystery_Quest({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-mystery-quest",
 });
 
 export const metadata: Metadata = {
@@ -27,9 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-purple-50 min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${mysteryQuest.variable} antialiased bg-purple-50 min-h-screen`}
       >
-        <Navigation />
+        <Header />
         <main>{children}</main>
         <Footer />
       </body>
