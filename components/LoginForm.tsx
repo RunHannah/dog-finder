@@ -86,7 +86,7 @@ export function LoginForm() {
           </p>
         )}
         <button
-          className="bg-purple-800 hover:cursor-pointer text-white px-4 py-2 rounded-sm"
+          className="bg-purple-800 cursor-pointer text-white px-4 py-2 rounded-sm"
           disabled={isLoading}
           type="submit"
         >

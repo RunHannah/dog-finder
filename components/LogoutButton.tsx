@@ -3,6 +3,7 @@
 import { useTransition, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "../actions/auth";
+import { Button } from "./ui/button";
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -27,11 +28,12 @@ export default function LogoutButton() {
   }, [isPending, router]);
 
   return (
-    <button
+    <Button
       onClick={handleLogout}
-      className="border-2 border-purple-950 mr-2 my-2 p-2 h-[55px] bg-white text-purple-950 w-[170px] rounded-4xl text-lg font-bold flex justify-center items-center hover:bg-purple-50"
+      className="border-2 border-purple-950 mr-2 my-2 p-2 h-[55px] bg-purple-50 text-purple-900 w-[170px] rounded-4xl text-lg font-bold flex justify-center items-center hover:text-white hover:bg-purple-900 cursor-pointer"
+      variant="outline"
     >
       Logout
-    </button>
+    </Button>
   );
 }

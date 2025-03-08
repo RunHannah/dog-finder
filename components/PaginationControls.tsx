@@ -62,7 +62,7 @@ export default function PaginationControls({
       {/* Trying to replicate pet finder pagination */}
       <div ref={dropdownRef} className="relative ">
         <div
-          className="flex justify-center items-center text-xl border-2 border-purple-900 mx-5 p-5 h-[55px] max-w-[155px] sm:w-[155px] rounded-sm hover:cursor-pointer"
+          className="flex justify-center items-center text-xl border-2 border-purple-900 mx-5 p-5 h-[55px] max-w-[155px] sm:w-[155px] rounded-sm cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           {`PAGE ${currentPage + 1}/${totalPages}`}
@@ -70,7 +70,7 @@ export default function PaginationControls({
 
         {/* dropdown list */}
         {isOpen && (
-          <ul className="absolute max-h-72 max-w-[155px] sm:w-[155px] mx-5 py-2 bg-white overflow-auto hover:cursor-pointer">
+          <ul className="absolute max-h-72 max-w-[155px] sm:w-[155px] mx-5 py-2 bg-white overflow-auto cursor-pointer">
             {pagesArray.map((page) => (
               <PaginationItem key={page} className="hover:bg-gray-300">
                 <PaginationLink

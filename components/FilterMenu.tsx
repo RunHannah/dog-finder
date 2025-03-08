@@ -47,9 +47,11 @@ export default function FilterMenu({
       <div className="flex flex-col lg:flex-row">
         {/* Breeds */}
         <div className="flex flex-col m-2">
-          <label htmlFor="breed-select">Breed</label>
+          <label htmlFor="breed-select" className="text-sm md:text-base">
+            Breed
+          </label>
           <select
-            className="border-2 border-purple-950 my-2 p-2 h-[55px]"
+            className="border-2 border-purple-950 my-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
             id="breed-select"
             name="breeds"
             value={selectedBreed}
@@ -67,9 +69,11 @@ export default function FilterMenu({
 
         {/* Age - min */}
         <div className="flex flex-col m-2">
-          <label htmlFor="age-min">Age: Minimum</label>
+          <label htmlFor="age-min" className="text-sm md:text-base">
+            Age: Minimum
+          </label>
           <select
-            className="border-2 border-purple-950 my-2 p-2 h-[55px]"
+            className="border-2 border-purple-950 my-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
             id="age-min"
             name="age-min"
             value={ageMin || ""}
@@ -86,9 +90,11 @@ export default function FilterMenu({
 
         {/* Age - max */}
         <div className="flex flex-col m-2">
-          <label htmlFor="age-max">Age: Maximum</label>
+          <label htmlFor="age-max" className="text-sm md:text-base">
+            Age: Maximum
+          </label>
           <select
-            className="border-2 border-purple-950 my-2 p-2 h-[55px]"
+            className="border-2 border-purple-950 my-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
             id="age-max"
             name="age-max"
             value={ageMax || ""}
@@ -103,6 +109,7 @@ export default function FilterMenu({
           </select>
         </div>
       </div>
+      {/* div wrapper so error message displays below filters*/}
       {error && (
         <p className="text-sm text-red-700 font-bold mb-2 p-2">{error}</p>
       )}

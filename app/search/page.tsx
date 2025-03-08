@@ -46,9 +46,9 @@ function SearchPage() {
 
   return (
     <div>
-      <LocationSearch setLocation={setLocation} />
+      {/* <LocationSearch setLocation={setLocation} /> */}
       <div className="max-w-[1400px] m-auto">
-        <div className="flex flex-row justify-center lg:justify-between items-baseline min-h-40">
+        <div className="flex flex-col md:flex-row justify-center lg:justify-between items-center md:items-baseline min-h-40">
           <FilterMenu
             breeds={breeds}
             selectedBreed={selectedBreed}

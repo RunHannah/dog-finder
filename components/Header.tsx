@@ -8,11 +8,16 @@ export default async function Header() {
   const isAuthenticated = !!cookieStore.get("session");
 
   return (
-    <header className="flex flex-row justify-between">
-      <Link className="font-logo text-4xl m-2 text-purple-900" href="/">
-        dog finder
-      </Link>
-      {isAuthenticated ? <LogoutButton /> : <LoginDialog />}
+    <header className="w-full">
+      <div className="flex flex-row justify-between items-center max-w-[1400px] m-auto">
+        <Link
+          className="font-logo text-4xl m-2 pt-0.5 text-purple-900"
+          href="/"
+        >
+          dog finder
+        </Link>
+        {isAuthenticated ? <LogoutButton /> : <LoginDialog />}
+      </div>
     </header>
   );
 }
