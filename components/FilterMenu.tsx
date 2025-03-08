@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface FilterMenuProps {
   breeds: string[];
-  selectedBreed: string;
-  ageMin: number | null;
-  ageMax: number | null;
   setSelectedBreed: (value: string) => void;
   getAgeMin: (value: number | null) => void;
   getAgeMax: (value: number | null) => void;
@@ -12,9 +18,6 @@ interface FilterMenuProps {
 
 export default function FilterMenu({
   breeds,
-  selectedBreed,
-  ageMin,
-  ageMax,
   setSelectedBreed,
   getAgeMin,
   getAgeMax,
@@ -24,12 +27,9 @@ export default function FilterMenu({
   const [error, setError] = useState("");
   const ageRange = Array.from({ length: 16 }, (_, index) => index);
 
-  const handleAgeFilter = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    type: "ageMin" | "ageMax"
-  ) => {
-    if (type === "ageMin") setMin(Number(e.target.value));
-    if (type === "ageMax") setMax(Number(e.target.value));
+  const handleAgeFilter = (value: string, type: "ageMin" | "ageMax") => {
+    if (type === "ageMin") setMin(Number(value));
+    if (type === "ageMax") setMax(Number(value));
   };
 
   useEffect(() => {
@@ -44,70 +44,62 @@ export default function FilterMenu({
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row justify-evenly">
         {/* Breeds */}
-        <div className="flex flex-col m-2">
-          <label htmlFor="breed-select" className="text-sm md:text-base">
-            Breed
-          </label>
-          <select
-            className="border-2 border-purple-950 my-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
-            id="breed-select"
-            name="breeds"
-            value={selectedBreed}
-            onChange={(e) => setSelectedBreed(e.target.value)}
-          >
-            <option value="">Choose a breed</option>
-            {breeds.length > 0 &&
-              breeds.map((breed) => (
-                <option key={breed} value={breed}>
-                  {breed}
-                </option>
-              ))}
-          </select>
-        </div>
+        <Select onValueChange={(value) => setSelectedBreed(value)}>
+          <SelectTrigger className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer">
+            <SelectValue placeholder="Choose a breed" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel className="text-sm md:text-base">Breeds</SelectLabel>
+              {breeds.length > 0 &&
+                breeds.map((breed) => (
+                  <SelectItem key={breed} value={breed}>
+                    {breed}
+                  </SelectItem>
+                ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
         {/* Age - min */}
-        <div className="flex flex-col m-2">
-          <label htmlFor="age-min" className="text-sm md:text-base">
-            Age: Minimum
-          </label>
-          <select
-            className="border-2 border-purple-950 my-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
-            id="age-min"
-            name="age-min"
-            value={ageMin || ""}
-            onChange={(e) => handleAgeFilter(e, "ageMin")}
-          >
-            <option value="">minimum age</option>
-            {ageRange.map((age) => (
-              <option key={age} value={age}>
-                {age}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Select onValueChange={(value) => handleAgeFilter(value, "ageMin")}>
+          <SelectTrigger className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer">
+            <SelectValue placeholder="Choose a min age" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel className="text-sm md:text-base">
+                Age range
+              </SelectLabel>
+              {ageRange.map((age) => (
+                <SelectItem key={age} value={age.toString()}>
+                  {age} years
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
         {/* Age - max */}
-        <div className="flex flex-col m-2">
-          <label htmlFor="age-max" className="text-sm md:text-base">
-            Age: Maximum
-          </label>
-          <select
-            className="border-2 border-purple-950 my-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
-            id="age-max"
-            name="age-max"
-            value={ageMax || ""}
-            onChange={(e) => handleAgeFilter(e, "ageMax")}
-          >
-            <option value="">maximum age</option>
-            {ageRange.map((age) => (
-              <option key={age} value={age}>
-                {age}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Select onValueChange={(value) => handleAgeFilter(value, "ageMax")}>
+          <SelectTrigger className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer">
+            <SelectValue placeholder="Choose a max age" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel className="text-sm md:text-base">
+                Age range
+              </SelectLabel>
+              {ageRange.map((age) => (
+                <SelectItem key={age} value={age.toString()}>
+                  {age} years
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
       {/* div wrapper so error message displays below filters*/}
       {error && (

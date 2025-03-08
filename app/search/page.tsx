@@ -48,14 +48,11 @@ function SearchPage() {
     <div>
       {/* <LocationSearch setLocation={setLocation} /> */}
       <div className="max-w-[1400px] m-auto">
-        <div className="flex flex-col md:flex-row justify-center lg:justify-between items-center md:items-baseline min-h-40">
+        <div className="flex flex-col md:flex-row justify-center lg:justify-between items-center md:items-baseline min-h-40 m-auto">
           <FilterMenu
             breeds={breeds}
-            selectedBreed={selectedBreed}
             setSelectedBreed={setSelectedBreed}
-            ageMin={ageMin}
             getAgeMin={getAgeMin}
-            ageMax={ageMax}
             getAgeMax={getAgeMax}
           />
           <SortMenu

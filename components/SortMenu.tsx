@@ -1,4 +1,13 @@
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { SortCategory, SortOrder } from "@/types/Search";
 
 interface SortMenuProps {
@@ -12,42 +21,45 @@ export default function SortMenu({
   setSortOrder,
   setSortCategory,
 }: SortMenuProps) {
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as SortCategory;
-    setSortCategory(value);
+  const handleCategoryChange = (value: string) => {
+    setSortCategory(value as SortCategory);
   };
 
   return (
-    <div className="m-2 flex flex-col lg:flex-row items-end">
-      <div className="flex flex-col m-2">
-        <label htmlFor="sort-category">Sort By</label>
-        <select
-          name="sort-category"
-          className="border-2 border-purple-950 mr-2 my-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] bg-white text-purple-900 w-[170px] cursor-pointer"
-          onChange={handleCategoryChange}
+    <div className="flex flex-col lg:flex-row justify-evenly">
+      <Select onValueChange={(value: string) => handleCategoryChange(value)}>
+        <SelectTrigger className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer">
+          <SelectValue placeholder="Select a category" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel className="text-sm md:text-base">
+              Select a category
+            </SelectLabel>
+            {sortCategories.map((category) => (
+              <SelectItem key={category} value={category}>
+                {category}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      <div className="flex flex-col lg:flex-row lg:min-w-[200px]">
+        <Button
+          variant={"outline"}
+          className="border-purple-900 border-2 bg-white text-purple-900 m-2 text-sm md:text-base h-[35px] lg:w-[90px] md:h-[55px] hover:bg-purple-900  hover:text-white cursor-pointer"
+          onClick={() => setSortOrder("asc")}
         >
-          <option value="">Select a category</option>
-          {sortCategories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+          Asc
+        </Button>
+        <Button
+          variant={"outline"}
+          className="border-purple-900 border-2 bg-white text-purple-900 m-2 text-sm md:text-base h-[35px] lg:w-[90px]  md:h-[55px] hover:bg-purple-900  hover:text-white cursor-pointer"
+          onClick={() => setSortOrder("desc")}
+        >
+          Desc
+        </Button>
       </div>
-      <Button
-        variant={"outline"}
-        className="border-purple-900 border-2 bg-white text-purple-900 m-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] w-[100px] hover:bg-purple-900  hover:text-white cursor-pointer"
-        onClick={() => setSortOrder("asc")}
-      >
-        Asc
-      </Button>
-      <Button
-        variant={"outline"}
-        className="border-purple-900 border-2 bg-white text-purple-900 m-2 p-2 text-sm md:text-base h-[35px] md:h-[55px] w-[100px] hover:bg-purple-900  hover:text-white cursor-pointer"
-        onClick={() => setSortOrder("desc")}
-      >
-        Desc
-      </Button>
     </div>
   );
 }
