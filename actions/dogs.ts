@@ -1,6 +1,6 @@
 "server only";
 
-import { SearchParams } from "@/types/Search";
+import { SearchParams, CityStateType } from "@/types/Search";
 
 const url = "https://frontend-take-home-service.fetch.com";
 
@@ -22,7 +22,7 @@ export async function getBreeds() {
 // will return an array of dogs ids: resultIds[]
 export async function searchDogs({
   breeds,
-  zipCode,
+  zipCodes,
   ageMin,
   ageMax,
   size,
@@ -37,7 +37,10 @@ export async function searchDogs({
       queryParams.append("breeds", breeds.join(","));
     }
 
-    if (zipCode) queryParams.append("zip_code", zipCode.toString());
+    if (zipCodes && zipCodes.length > 0) {
+      zipCodes.forEach((zip) => queryParams.append("zipCodes", zip));
+    }
+
     if (ageMin) queryParams.append("ageMin", ageMin.toString());
     if (ageMax) queryParams.append("ageMax", ageMax.toString());
     if (size) queryParams.append("size", size.toString());
@@ -54,6 +57,7 @@ export async function searchDogs({
     });
 
     const data = await response.json();
+
     return data;
   } catch (error) {
     console.error("Failed to search dogs", error);
@@ -79,5 +83,29 @@ export async function fetchDogsByIds(ids: string[]) {
   } catch (error) {
     console.error("Failed to getDogsByIds", error);
     throw error;
+  }
+}
+
+export async function getZipCodesByCityState({ city, state }: CityStateType) {
+  const validatedCity = city && /^[A-Za-z\s]+$/.test(city?.trim());
+  const validatedState = state && Array.isArray(state);
+
+  try {
+    if (validatedCity && validatedState) {
+      const response = await fetch(`${url}/locations/search`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ city: city, state: state }),
+        credentials: "include",
+      });
+
+      const data = await response.json();
+      return data.results;
+    }
+  } catch (error) {
+    console.error("Error fetching zip codes", error);
   }
 }

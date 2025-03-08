@@ -15,14 +15,14 @@ export interface SearchParams {
   breeds: string[];
   size: number;
   from: number;
-  zipCode: string;
+  zipCodes: string[];
   ageMin: number | null;
   ageMax: number | null;
   sort: unknown;
 }
 
 export interface SearchFilter
-  extends Pick<SearchParams, "zipCode" | "ageMin" | "ageMax"> {
+  extends Pick<SearchParams, "zipCodes" | "ageMin" | "ageMax"> {
   page: number;
   selectedBreed: string;
   sortCategory: SortCategory;
@@ -34,3 +34,17 @@ export const SORT_CATEGORIES = {
   age: "age",
   name: "name",
 } as const;
+
+export interface Location {
+  zip_code: string;
+  latitude: number;
+  longitude: number;
+  city: string;
+  state: string;
+  county: string;
+}
+
+export type CityStateType = {
+  city: string;
+  state: string[];
+};

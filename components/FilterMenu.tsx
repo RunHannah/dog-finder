@@ -34,7 +34,7 @@ export default function FilterMenu({
 
   useEffect(() => {
     if (min !== null && max !== null && min > max) {
-      setError(`Please select a minimum age less than ${max}`);
+      setError(`Please select an age greater than ${min} years.`);
     } else {
       getAgeMin(min);
       getAgeMax(max);

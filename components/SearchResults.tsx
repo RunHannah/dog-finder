@@ -16,7 +16,7 @@ export default function SearchResults({
   selectedBreed,
   sortCategory,
   sortOrder,
-  zipCode,
+  zipCodes,
   getTotalPages,
 }: SearchResultsProps) {
   const { dogProfiles, totalPages, error, isLoading } = useSearch({
@@ -26,7 +26,7 @@ export default function SearchResults({
     selectedBreed,
     sortCategory,
     sortOrder,
-    zipCode,
+    zipCodes,
   });
 
   useEffect(() => {
