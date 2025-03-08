@@ -46,7 +46,6 @@ function SearchPage() {
 
   return (
     <div>
-      <h1>Dog Finder: All About Doggos!</h1>
       <LocationSearch setLocation={setLocation} />
       <div className="max-w-[1400px] m-auto">
         <div className="flex flex-row justify-center lg:justify-between items-baseline min-h-40">

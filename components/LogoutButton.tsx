@@ -1,19 +1,30 @@
 "use client";
 
-import { logout } from "../actions/auth";
+import { useTransition, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { logout } from "../actions/auth";
 
 export default function LogoutButton() {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const handleLogout = async () => {
     try {
-      await logout();
-      router.refresh();
+      const result = await logout();
+      if (result.success) {
+        startTransition(() => {});
+      }
     } catch (error) {
       console.error("Failed to logout", error);
     }
   };
+
+  useEffect(() => {
+    if (isPending === false) {
+      router.push("/");
+      router.refresh();
+    }
+  }, [isPending, router]);
 
   return (
     <button

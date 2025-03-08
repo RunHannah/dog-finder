@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import LoginLink from "./LoginLink";
+import LoginDialog from "./LoginDialog";
 import LogoutButton from "./LogoutButton";
 
 export default async function Header() {
@@ -12,7 +12,7 @@ export default async function Header() {
       <Link className="font-logo text-4xl m-2 text-purple-900" href="/">
         dog finder
       </Link>
-      {isAuthenticated ? <LogoutButton /> : <LoginLink />}
+      {isAuthenticated ? <LogoutButton /> : <LoginDialog />}
     </header>
   );
 }
