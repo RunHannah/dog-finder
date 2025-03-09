@@ -90,7 +90,7 @@ export function LoginForm() {
           disabled={isLoading}
           type="submit"
         >
-          Login
+          {isLoading ? "Loading..." : "Login"}
         </button>
       </form>
     </Form>

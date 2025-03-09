@@ -81,7 +81,7 @@ export default function LocationInputAndFavoritesLink({
 
         {/* Link to favorites */}
         <Link
-          className="mt-2 md:mt-0 h-10 md:h-14 w-full md:w-[30%] lg:w-[150px] xl:w-[200px] text-center border-2 bg-purple-700 text-white text-base hover:bg-purple-900 cursor-pointer rounded-md flex justify-center items-center md:ml-4"
+          className="mt-2 md:mt-0 h-10 md:h-14 w-full md:w-[30%] lg:w-[150px] xl:w-[200px] text-center border-purple-200 border-2 bg-purple-200 text-purple-900 text-base hover:text-white hover:bg-purple-900 cursor-pointer rounded-md flex justify-center items-center md:ml-4"
           href="/favorites"
         >
           See your favorites

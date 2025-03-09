@@ -47,14 +47,14 @@ export default function SortMenu({
       <div className="flex flex-col lg:flex-row lg:min-w-[200px]">
         <Button
           variant={"outline"}
-          className="border-purple-900 border-2 bg-white text-purple-900 m-2 text-sm md:text-base h-[35px] lg:w-[90px] md:h-[55px] hover:bg-purple-900  hover:text-white cursor-pointer"
+          className="border-purple-900 border-2 bg-purple-50 text-purple-900 m-2 text-sm md:text-base h-[35px] lg:w-[90px] md:h-[55px] hover:bg-purple-900  hover:text-white cursor-pointer"
           onClick={() => setSortOrder("asc")}
         >
           Asc
         </Button>
         <Button
           variant={"outline"}
-          className="border-purple-900 border-2 bg-white text-purple-900 m-2 text-sm md:text-base h-[35px] lg:w-[90px]  md:h-[55px] hover:bg-purple-900  hover:text-white cursor-pointer"
+          className="border-purple-900 border-2 bg-purple-50 text-purple-900 m-2 text-sm md:text-base h-[35px] lg:w-[90px]  md:h-[55px] hover:bg-purple-900  hover:text-white cursor-pointer"
           onClick={() => setSortOrder("desc")}
         >
           Desc
