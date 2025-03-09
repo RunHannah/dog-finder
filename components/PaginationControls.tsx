@@ -48,7 +48,7 @@ export default function PaginationControls({
     <Pagination className="items-center mb-2.5">
       <PaginationItem className="list-none">
         <PaginationPrevious
-          className={`text-purple-900 text-xl border-2 border-purple-900 mx-5 p-5 h-[55px] max-w-[155px] sm:w-[155px] rounded-sm hover:bg-purple-900 hover:text-white
+          className={`text-purple-900 text-base border-2 border-purple-900 mx-5 p-5 h-[55px] max-w-[155px] sm:w-[155px] rounded-sm hover:bg-purple-900 hover:text-white
             ${
               currentPage === 0
                 ? "cursor-not-allowed opacity-50"
@@ -61,12 +61,12 @@ export default function PaginationControls({
 
       {/* Trying to replicate pet finder pagination */}
       <div ref={dropdownRef} className="relative ">
-        <div
-          className="flex justify-center items-center text-xl border-2 border-purple-900 mx-5 p-5 h-[55px] max-w-[155px] sm:w-[155px] rounded-sm cursor-pointer"
+        <p
+          className="flex justify-center items-center text-center text-base border-2 border-purple-900 mx-5 p-5 h-[55px] max-w-[155px] sm:w-[155px] rounded-sm cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {`PAGE ${currentPage + 1}/${totalPages}`}
-        </div>
+          {`Page ${currentPage + 1}/${totalPages}`}
+        </p>
 
         {/* dropdown list */}
         {isOpen && (
@@ -87,7 +87,7 @@ export default function PaginationControls({
 
       <PaginationItem className="list-none">
         <PaginationNext
-          className={`text-purple-900 text-xl border-2 border-purple-900 mx-5 p-5 h-[55px] max-w-[155px] sm:w-[155px] rounded-sm hover:bg-purple-900 hover:text-white
+          className={`text-purple-900 text-base border-2 border-purple-900 mx-5 p-5 h-[55px] max-w-[155px] sm:w-[155px] rounded-sm hover:bg-purple-900 hover:text-white
             ${
               currentPage + 1 === totalPages
                 ? "cursor-not-allowed opacity-50"

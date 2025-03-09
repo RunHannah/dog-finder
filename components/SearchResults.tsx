@@ -50,7 +50,22 @@ export default function SearchResults({
   }
 
   if (error) {
-    return <p className="text-red-600 font-bold text-center">{error}</p>;
+    return (
+      <div className="min-h-screen">
+        <p className="text-red-600 text-center">{error}</p>;
+      </div>
+    );
+  }
+
+  if (dogProfiles.length === 0) {
+    return (
+      <div className="min-h-screen">
+        <p className="text-purple-900 text-center">
+          Sorry no profiles were found. 🐶
+        </p>
+        ;
+      </div>
+    );
   }
 
   return (

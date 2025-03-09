@@ -38,7 +38,7 @@ export const useSearch = ({
       setDogProfiles(profilesResult);
     } catch (error) {
       console.error("Error fetching dogs:", error);
-      setError("Error fetching dog");
+      setError("Sorry, there was an error. Please try again later. 😞");
     } finally {
       setIsLoading(false);
     }
