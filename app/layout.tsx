@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Mystery_Quest } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { FavoritesProvider } from "@/context/FavoritesContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,7 +37,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${mysteryQuest.variable} antialiased bg-purple-50 min-h-screen`}
       >
         <Header />
-        <main>{children}</main>
+        <main>
+          <FavoritesProvider>{children}</FavoritesProvider>
+        </main>
         <Footer />
       </body>
     </html>

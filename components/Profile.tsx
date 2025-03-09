@@ -5,7 +5,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { DogProfile } from "@/types/Search";
+import { useFavorites } from "@/context/FavoritesContext";
 
 export default function Profile({
   id,
@@ -15,6 +17,18 @@ export default function Profile({
   age,
   zip_code,
 }: DogProfile) {
+  const { addFavorite, removeFavorite, favorites } = useFavorites();
+
+  const isFavorite = favorites.some((dog) => dog.id === id);
+
+  const handleFavorite = (id: string) => {
+    if (isFavorite) {
+      removeFavorite(id);
+    } else {
+      addFavorite({ id, img, breed, name, age, zip_code });
+    }
+  };
+
   return (
     <Card key={id} className="max-w-xs mx-auto pt-0">
       <div className="w-[250px] h-[250px] overflow-hidden relative flex items-center justify-center">
@@ -31,7 +45,16 @@ export default function Profile({
         />
       </div>
       <CardHeader>
-        <CardTitle className="text-2xl text-purple-900">{name}</CardTitle>
+        <div className="flex flex-row justify-between">
+          <CardTitle className="text-2xl text-purple-900">{name}</CardTitle>
+          <Button
+            className="w-[35px] text-3xl bg-transparent rounded-full hover:bg-purple-900 cursor-pointer"
+            onClick={() => handleFavorite(id)}
+          >
+            {" "}
+            {isFavorite ? "💜" : "💔"}
+          </Button>
+        </div>
         <CardDescription className="flex flex-col">
           <p className="text-base">{breed}</p>
           <p className="text-base">

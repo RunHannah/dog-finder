@@ -109,3 +109,22 @@ export async function getZipCodesByCityState({ city, state }: CityStateType) {
     console.error("Error fetching zip codes", error);
   }
 }
+
+export async function getMatch(dogIds: string[]) {
+  try {
+    const response = await fetch(`${url}/dogs/match`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(dogIds),
+      credentials: "include",
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching zip codes", error);
+  }
+}

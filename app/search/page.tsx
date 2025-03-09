@@ -1,14 +1,18 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { getZipCodesByCityState } from "@/actions/dogs";
-import LocationInput from "@/components/LocationInput";
+import LocationInputAndFavoritesLink from "@/components/LocationInputAndFavoritesLink";
 import FilterMenu from "@/components/FilterMenu";
 import SortMenu from "@/components/SortMenu";
-import { SortCategory, SortOrder } from "@/types/Search";
+import {
+  SortCategory,
+  SortOrder,
+  Location,
+  CityStateType,
+} from "@/types/Search";
 import { getBreeds } from "@/actions/dogs";
 import SearchResults from "@/components/SearchResults";
 import PaginationControls from "@/components/PaginationControls";
-import { Location, CityStateType } from "@/types/Search";
 
 function SearchPage() {
   const [breeds, setBreeds] = useState<string[]>([]);
@@ -67,7 +71,7 @@ function SearchPage() {
 
   return (
     <div>
-      <LocationInput setLocation={setLocation} />
+      <LocationInputAndFavoritesLink setLocation={setLocation} />
       <div className="max-w-[1400px] m-auto">
         <div className="flex flex-col md:flex-row justify-center lg:justify-between items-center md:items-baseline min-h-40 m-auto">
           <FilterMenu

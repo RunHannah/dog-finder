@@ -14,7 +14,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mb-10">
       <section className="relative w-full h-[500px]">
         <Image
           src="/dog-one.jpg"
@@ -37,7 +37,7 @@ export default function Home() {
         <div className="my-10 text-center text-2xl text-purple-900 font-bold">
           <p>Dogs Available for Adoption Nearby</p>
         </div>
-        <div className="mb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {pets.map((pet) => (
             <PetCard
               key={pet.name}
