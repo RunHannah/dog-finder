@@ -27,9 +27,9 @@ export default function LoginDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Login</DialogTitle>
+          <DialogTitle className="text-purple-900">Login</DialogTitle>
           <DialogDescription>
-            Can provie a generic username and email
+            Enter a generic username and email
           </DialogDescription>
         </DialogHeader>
         <LoginForm />
