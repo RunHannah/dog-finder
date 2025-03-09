@@ -63,7 +63,6 @@ export default function SearchResults({
         <p className="text-purple-900 text-center">
           Sorry no profiles were found. 🐶
         </p>
-        ;
       </div>
     );
   }
