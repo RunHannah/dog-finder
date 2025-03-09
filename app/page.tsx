@@ -37,7 +37,7 @@ export default function Home() {
         <div className="my-10 text-center text-2xl text-purple-900 font-bold">
           <p>Dogs Available for Adoption Nearby</p>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-evenly mb-10">
+        <div className="mb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {pets.map((pet) => (
             <PetCard
               key={pet.name}
