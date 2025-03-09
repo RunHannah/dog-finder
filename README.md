@@ -33,7 +33,7 @@ Find your new best friend! Browse dogs from our network of shelters and rescues.
 - **React 19**
 - **Next.js 15**
 - **React Hook Form**
-- **Zodm**
+- **Zod**
 - **Tailwind**
 - **Shadcn/ui**
 
