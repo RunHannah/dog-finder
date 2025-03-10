@@ -52,7 +52,7 @@ export default function SearchResults({
   if (error) {
     return (
       <div className="min-h-screen">
-        <p className="text-red-600 text-center">{error}</p>;
+        <p className="text-red-600 text-center">{error}</p>
       </div>
     );
   }
