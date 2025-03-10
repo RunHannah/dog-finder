@@ -89,10 +89,7 @@ export default function FavoritesPage() {
 
         {/* Match Success */}
         {isDrawerOpen && viewMatch && (
-          <Drawer
-            aria-describedby={`You matched with ${viewMatch.name}!`}
-            open={isDrawerOpen}
-          >
+          <Drawer open={isDrawerOpen}>
             <DrawerContent className="bg-purple-100">
               <DrawerHeader>
                 <DrawerTitle className="text-center text-2xl text-purple-900">

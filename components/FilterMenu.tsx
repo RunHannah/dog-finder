@@ -47,12 +47,17 @@ export default function FilterMenu({
       <div className="flex flex-col lg:flex-row justify-evenly">
         {/* Breeds */}
         <Select onValueChange={(value) => setSelectedBreed(value)}>
-          <SelectTrigger className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer">
+          <SelectTrigger
+            aria-label="Select a breed"
+            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
+          >
             <SelectValue placeholder="Choose a breed" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel className="text-sm md:text-base">Breeds</SelectLabel>
+              <SelectLabel className="text-sm md:text-base text-purple-900">
+                Breeds
+              </SelectLabel>
               {breeds.length > 0 &&
                 breeds.map((breed) => (
                   <SelectItem key={breed} value={breed}>
@@ -65,12 +70,15 @@ export default function FilterMenu({
 
         {/* Age - min */}
         <Select onValueChange={(value) => handleAgeFilter(value, "ageMin")}>
-          <SelectTrigger className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer">
+          <SelectTrigger
+            aria-label="Select minimum age"
+            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
+          >
             <SelectValue placeholder="Choose a min age" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel className="text-sm md:text-base">
+              <SelectLabel className="text-sm md:text-base text-purple-900">
                 Age range
               </SelectLabel>
               {ageRange.map((age) => (
@@ -84,12 +92,15 @@ export default function FilterMenu({
 
         {/* Age - max */}
         <Select onValueChange={(value) => handleAgeFilter(value, "ageMax")}>
-          <SelectTrigger className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer">
+          <SelectTrigger
+            aria-label="Select maximum age"
+            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
+          >
             <SelectValue placeholder="Choose a max age" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel className="text-sm md:text-base">
+              <SelectLabel className="text-sm md:text-base text-purple-900">
                 Age range
               </SelectLabel>
               {ageRange.map((age) => (
@@ -103,7 +114,13 @@ export default function FilterMenu({
       </div>
       {/* div wrapper so error message displays below filters*/}
       {error && (
-        <p className="text-sm text-red-700 font-bold mb-2 p-2">{error}</p>
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="text-sm text-red-700 font-bold mb-2 p-2"
+        >
+          {error}
+        </div>
       )}
     </div>
   );

@@ -1,3 +1,6 @@
+"use client";
+
+import { useCallback } from "react";
 import Image from "next/image";
 import {
   Card,
@@ -21,13 +24,28 @@ export default function Profile({
 
   const isFavorite = favorites.some((dog) => dog.id === id);
 
-  const handleFavorite = (id: string) => {
+  const handleFavorite = useCallback(() => {
     if (isFavorite) {
       removeFavorite(id);
     } else {
       addFavorite({ id, img, breed, name, age, zip_code });
     }
-  };
+  }, [
+    isFavorite,
+    removeFavorite,
+    addFavorite,
+    id,
+    img,
+    breed,
+    name,
+    age,
+    zip_code,
+  ]);
+
+  // Generate status message for screen readers
+  const statusMessage = isFavorite
+    ? "Saved as a favorite"
+    : "Removed from favorites";
 
   return (
     <Card key={id} className="max-w-xs mx-auto pt-0">
@@ -47,11 +65,20 @@ export default function Profile({
       <CardHeader>
         <div className="flex flex-row justify-between">
           <CardTitle className="text-2xl text-purple-900">{name}</CardTitle>
-          <Button
-            className="w-[35px] text-3xl bg-transparent rounded-full hover:bg-purple-900 cursor-pointer"
-            onClick={() => handleFavorite(id)}
+          <div
+            role="status"
+            aria-live="assertive"
+            className="sr-only" // Ensure it’s visually hidden but still accessible
           >
-            {" "}
+            {statusMessage}
+          </div>
+          <Button
+            aria-label={`Click to ${
+              isFavorite ? "remove from" : "save as"
+            } favorites`}
+            className="w-[35px] text-3xl bg-transparent rounded-full hover:bg-purple-900 cursor-pointer"
+            onClick={handleFavorite}
+          >
             {isFavorite ? "💜" : "💔"}
           </Button>
         </div>
