@@ -7,6 +7,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "@/actions/auth";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoginFormSchema } from "@/lib/definitions";
@@ -85,13 +86,13 @@ export function LoginForm() {
             {form.formState.errors.email.message}
           </p>
         )}
-        <button
+        <Button
           className="bg-purple-800 cursor-pointer text-white px-4 py-2 rounded-sm"
           disabled={isLoading}
           type="submit"
         >
           {isLoading ? "Loading..." : "Login"}
-        </button>
+        </Button>
       </form>
     </Form>
   );

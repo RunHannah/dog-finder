@@ -33,19 +33,21 @@ export default function Home() {
           </h2>
         </div>
       </section>
-      <section>
-        <div className="my-10 text-center text-2xl text-purple-900 font-bold">
-          <p>Dogs Available for Adoption Nearby</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {pets.map((pet) => (
-            <PetCard
-              key={pet.name}
-              name={pet.name}
-              src={pet.src}
-              alt={pet.src}
-            />
-          ))}
+      <section className="max-w-[1400px] mx-auto">
+        <div className="mx-2">
+          <div className="my-10 text-center text-2xl text-purple-900 font-bold">
+            <p>Dogs Available for Adoption Nearby</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {pets.map((pet) => (
+              <PetCard
+                key={pet.name}
+                name={pet.name}
+                src={pet.src}
+                alt={pet.src}
+              />
+            ))}
+          </div>
         </div>
       </section>
     </div>
