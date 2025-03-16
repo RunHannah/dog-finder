@@ -19,9 +19,9 @@ export default function Home() {
         <Image
           src="/dog-one.jpg"
           fill
-          objectFit="cover"
           alt="hero photo of a happy dog"
           className="object-cover w-full h-full"
+          priority={true}
         />
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
         <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-2.5">
