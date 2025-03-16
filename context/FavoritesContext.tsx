@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+} from "react";
 import { DogProfile } from "@/types/Search";
 
 interface FavoritesContextType {
@@ -24,15 +30,15 @@ export const useFavorites = () => {
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<DogProfile[]>([]);
 
-  const addFavorite = (dog: DogProfile) => {
+  const addFavorite = useCallback((dog: DogProfile) => {
     setFavorites((prevFavorites) => [...prevFavorites, dog]);
-  };
+  }, []);
 
-  const removeFavorite = (dogId: string) => {
+  const removeFavorite = useCallback((dogId: string) => {
     setFavorites((prevFavorites) =>
       prevFavorites.filter((dog) => dog.id !== dogId)
     );
-  };
+  }, []);
 
   return (
     <FavoritesContext.Provider

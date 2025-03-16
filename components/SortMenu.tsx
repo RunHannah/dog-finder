@@ -29,15 +29,15 @@ export default function SortMenu({
     <div className="flex flex-col lg:flex-row justify-evenly">
       <Select onValueChange={(value: string) => handleCategoryChange(value)}>
         <SelectTrigger
-          aria-label="Select a category"
+          aria-label="Sort by"
           className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
         >
-          <SelectValue placeholder="Select a category" />
+          <SelectValue placeholder="Sort by" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel className="text-sm md:text-base text-purple-900">
-              Select a category
+              Sort by
             </SelectLabel>
             {sortCategories.map((category) => (
               <SelectItem key={category} value={category}>

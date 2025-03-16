@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getZipCodesByCityState } from "@/actions/dogs";
 import LocationInputAndFavoritesLink from "@/components/LocationInputAndFavoritesLink";
 import FilterMenu from "@/components/FilterMenu";
@@ -14,7 +14,7 @@ import { getBreeds } from "@/actions/dogs";
 import SearchResults from "@/components/SearchResults";
 import PaginationControls from "@/components/PaginationControls";
 
-function SearchPage() {
+export default function SearchPage() {
   const [breeds, setBreeds] = useState<string[]>([]);
   // Filtering
   const [ageMin, setAgeMin] = useState<number | null>(null);
@@ -36,18 +36,6 @@ function SearchPage() {
       setBreeds(result);
     };
     fetchBreeds();
-  }, []);
-
-  const getTotalPages = useCallback((value: number) => {
-    setTotalPages(value);
-  }, []);
-
-  const getAgeMin = useCallback((value: number | null) => {
-    setAgeMin(value);
-  }, []);
-
-  const getAgeMax = useCallback((value: number | null) => {
-    setAgeMax(value);
   }, []);
 
   useEffect(() => {
@@ -77,8 +65,8 @@ function SearchPage() {
           <FilterMenu
             breeds={breeds}
             setSelectedBreed={setSelectedBreed}
-            getAgeMin={getAgeMin}
-            getAgeMax={getAgeMax}
+            getAgeMin={setAgeMin}
+            getAgeMax={setAgeMax}
           />
           <SortMenu
             sortCategories={["age", "name", "breed"]}
@@ -94,7 +82,7 @@ function SearchPage() {
           sortCategory={sortCategory}
           sortOrder={sortOrder}
           zipCodes={zipCodes}
-          getTotalPages={getTotalPages}
+          getTotalPages={setTotalPages}
         />
       </div>
       <PaginationControls
@@ -105,5 +93,3 @@ function SearchPage() {
     </div>
   );
 }
-
-export default SearchPage;
