@@ -50,7 +50,7 @@ export default function FavoritesPage() {
   }, [viewMatch]);
 
   return (
-    <div className="min-h-screen mb-10">
+    <div className="mb-10">
       <div className="max-w-[1400px] m-auto">
         <h1 className="text-3xl text-center my-4">Your Favorite Dogs 💜</h1>
         <div className="flex flex-col md:flex-row justify-center">

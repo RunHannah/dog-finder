@@ -14,7 +14,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen mb-10">
+    <div className="mb-10">
       <section className="relative w-full h-[500px]">
         <Image
           src="/dog-one.jpg"

@@ -34,10 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${mysteryQuest.variable} antialiased bg-purple-50 min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${mysteryQuest.variable} antialiased bg-purple-50 min-h-screen flex flex-col`}
       >
         <Header />
-        <main>
+        <main className="flex-grow">
           <FavoritesProvider>{children}</FavoritesProvider>
         </main>
         <Footer />

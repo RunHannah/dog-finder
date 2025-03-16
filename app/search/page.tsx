@@ -62,9 +62,9 @@ export default function SearchPage() {
   }, [location]);
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <LocationInputAndFavoritesLink setLocation={setLocation} />
-      <div className="max-w-[1400px] m-auto">
+      <div className="max-w-[1400px] m-auto flex-grow">
         <div className="flex flex-col md:flex-row justify-center lg:justify-between items-center md:items-baseline min-h-40 m-auto">
           <FilterMenu
             breeds={breeds}
