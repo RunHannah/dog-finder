@@ -29,16 +29,10 @@ export default function LocationInputAndFavoritesLink({
   };
 
   const handleOnClick = () => {
-    if (
-      validatedCityState &&
-      validatedCityState.city &&
-      validatedCityState.state
-    ) {
-      setLocation({
-        city: validatedCityState.city,
-        state: [validatedCityState.state],
-      });
-    }
+    setLocation({
+      city: validatedCityState.city,
+      state: [validatedCityState.state],
+    });
   };
 
   useEffect(() => {
@@ -50,10 +44,8 @@ export default function LocationInputAndFavoritesLink({
   }, [inputValue]);
 
   useEffect(() => {
-    if (debouncedValue) {
-      const validatedCityState = cleanCityState(debouncedValue);
-      setValidatedCityState(validatedCityState);
-    }
+    const validatedCityState = cleanCityState(debouncedValue);
+    setValidatedCityState(validatedCityState);
   }, [debouncedValue]);
 
   return (

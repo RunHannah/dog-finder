@@ -52,8 +52,12 @@ export default function SearchPage() {
       }
     };
 
-    if (location && location.city && location.state) {
+    if (location?.city && location?.state[0].length) {
       fetchZipCodes(location);
+    } else if (location?.city.length === 0 && location?.state[0].length === 0) {
+      // User cleared the input field.
+      // Clear previously saved zipCodes
+      setZipCodes([]);
     }
   }, [location]);
 

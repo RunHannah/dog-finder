@@ -7,6 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function cleanCityState(input: string): ValidatedCityStateType {
+  // If the user cleared the input field
+  if (input.length === 0) return { city: "", state: "" };
+
   const [city, state] = input
     .split(",")
     .map((item) => item.trim().toLowerCase());
@@ -21,6 +24,6 @@ export function cleanCityState(input: string): ValidatedCityStateType {
     return { city, state };
   }
 
-  // TODO handle when not valid
+  // If city and state are not valid, then return all the results
   return { city: "", state: "" };
 }

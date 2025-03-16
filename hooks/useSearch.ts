@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { searchDogs, fetchDogsByIds } from "@/actions/dogs";
 import { DogProfile, SearchFilter } from "@/types/Search";
 
@@ -16,7 +16,7 @@ export const useSearch = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const search = async () => {
+  const search = useCallback(async () => {
     setIsLoading(true);
     try {
       const filters = {
@@ -42,11 +42,20 @@ export const useSearch = ({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [ageMax, ageMin, page, selectedBreed, sortCategory, sortOrder, zipCodes]);
 
   useEffect(() => {
     search();
-  }, [ageMax, ageMin, page, selectedBreed, sortCategory, sortOrder, zipCodes]);
+  }, [
+    ageMax,
+    ageMin,
+    page,
+    selectedBreed,
+    sortCategory,
+    sortOrder,
+    zipCodes,
+    search,
+  ]);
 
   return { dogProfiles, totalPages, error, isLoading };
 };
