@@ -5,7 +5,7 @@ import LogoutButton from "./LogoutButton";
 
 export default async function Header() {
   const cookieStore = await cookies();
-  const isAuthenticated = !!cookieStore.get("session");
+  const isAuthenticated = !!cookieStore.get("fetch-access-token");
 
   return (
     <header className="w-full">

@@ -1,14 +1,20 @@
-"server only";
+"use server";
 
-import { SearchParams, CityStateType } from "@/types/Search";
+import { cookies } from "next/headers";
+import { SearchParams, CityStateType, DogSearchResponse } from "@/types/Search";
 
 const url = "https://frontend-take-home-service.fetch.com";
 
 // returns an array of breed names
-export async function getBreeds() {
+export async function getBreeds(): Promise<string[]> {
   try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("fetch-access-token")?.value;
+
     const response = await fetch(`${url}/dogs/breeds`, {
-      credentials: "include",
+      headers: {
+        Cookie: `fetch-access-token=${token}`,
+      },
     });
 
     const data: string[] = await response.json();
@@ -28,7 +34,7 @@ export async function searchDogs({
   size,
   from,
   sort,
-}: SearchParams) {
+}: SearchParams): Promise<DogSearchResponse> {
   try {
     const queryParams = new URLSearchParams();
 
@@ -47,16 +53,23 @@ export async function searchDogs({
     if (from) queryParams.append("from", from.toString());
     if (sort) queryParams.append("sort", sort.toString());
 
+    const cookieStore = await cookies();
+    const token = cookieStore.get("fetch-access-token")?.value;
+
     const response = await fetch(`${url}/dogs/search?${queryParams}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Cookie: `fetch-access-token=${token}`,
       },
-      credentials: "include",
     });
 
-    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`Failed to fetch /dogs/search: ${response.statusText}`);
+    }
+
+    const data: DogSearchResponse = await response.json();
 
     return data;
   } catch (error) {
@@ -68,14 +81,17 @@ export async function searchDogs({
 export async function fetchDogsByIds(ids: string[]) {
   const idsLimit = ids.slice(0, 100); // max 100 ids
   try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("fetch-access-token")?.value;
+
     const response = await fetch(`${url}/dogs`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Cookie: `fetch-access-token=${token}`,
       },
       body: JSON.stringify(idsLimit),
-      credentials: "include",
     });
 
     const data = await response.json();
@@ -92,14 +108,17 @@ export async function getZipCodesByCityState({ city, state }: CityStateType) {
 
   try {
     if (validatedCity && validatedState) {
+      const cookieStore = await cookies();
+      const token = cookieStore.get("fetch-access-token")?.value;
+
       const response = await fetch(`${url}/locations/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          Cookie: `fetch-access-token=${token}`,
         },
         body: JSON.stringify({ city: city, state: state }),
-        credentials: "include",
       });
 
       const data = await response.json();
@@ -112,14 +131,17 @@ export async function getZipCodesByCityState({ city, state }: CityStateType) {
 
 export async function getMatch(dogIds: string[]) {
   try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("fetch-access-token")?.value;
+
     const response = await fetch(`${url}/dogs/match`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Cookie: `fetch-access-token=${token}`,
       },
       body: JSON.stringify(dogIds),
-      credentials: "include",
     });
 
     const data = await response.json();

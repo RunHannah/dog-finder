@@ -48,3 +48,9 @@ export type CityStateType = {
   city: string;
   state: string[];
 };
+
+export interface DogSearchResponse {
+  next: string; // "/dogs/search?size=25&from=25"
+  resultIds: string[];
+  total: number;
+}

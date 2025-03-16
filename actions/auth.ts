@@ -1,6 +1,7 @@
-"server only";
+"use server";
 
 import { z } from "zod";
+import { cookies } from "next/headers";
 import { LoginFormSchema } from "@/lib/definitions";
 import { createSession, deleteSession } from "@/lib/sessions";
 
@@ -31,19 +32,32 @@ export async function login({
     };
   }
 
-  await createSession(name);
+  const setCookieHeader = response.headers.get("set-cookie") || "";
+  await createSession(setCookieHeader);
 
   return { success: true };
 }
 
 export async function logout() {
-  await fetch("https://frontend-take-home-service.fetch.com/auth/logout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-  });
+  const cookieStore = await cookies();
+  const token = cookieStore.get("fetch-access-token")?.value;
+
+  const response = await fetch(
+    "https://frontend-take-home-service.fetch.com/auth/logout",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `fetch-access-token=${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    return {
+      success: false,
+    };
+  }
 
   deleteSession();
 

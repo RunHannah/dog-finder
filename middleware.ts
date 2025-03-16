@@ -13,7 +13,7 @@ export default async function middleware(req: NextRequest) {
 
   // 3. Get the session from the cookie
   const cookieStore = await cookies();
-  const cookie = cookieStore.get("session")?.value;
+  const cookie = cookieStore.get("fetch-access-token")?.value;
 
   // 4. Redirect to "/"" if the user is not authenticated
   if (isProtectedRoute && !cookie) {

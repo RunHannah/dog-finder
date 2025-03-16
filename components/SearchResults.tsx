@@ -1,3 +1,5 @@
+"use client";
+
 import { useSearch } from "@/hooks/useSearch";
 import { Skeleton } from "@/components/ui/skeleton";
 import Profile from "@/components/Profile";
