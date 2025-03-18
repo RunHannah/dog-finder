@@ -8,7 +8,11 @@ import { CityStateType } from "@/types/Search";
 import Link from "next/link";
 
 interface LocationInputAndFavoritesLinkProps {
-  setLocation: ({ city, state }: CityStateType) => void;
+  setLocation: (location: CityStateType | null) => void;
+  setSelectedBreed: (breed: string) => void;
+  getAgeMin: (minAge: number | null) => void;
+  getAgeMax: (maxAge: number | null) => void;
+  setZipCodes: (values: string[]) => void;
 }
 
 export type ValidatedCityStateType = {
@@ -18,11 +22,15 @@ export type ValidatedCityStateType = {
 
 export default function LocationInputAndFavoritesLink({
   setLocation,
+  setZipCodes,
+  setSelectedBreed,
+  getAgeMin,
+  getAgeMax,
 }: LocationInputAndFavoritesLinkProps) {
   const [inputValue, setInputValue] = useState("");
   const [debouncedValue, setDebouncedValue] = useState("");
   const [validatedCityState, setValidatedCityState] =
-    useState<ValidatedCityStateType>({ city: "", state: "" });
+    useState<ValidatedCityStateType | null>(null);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -31,10 +39,23 @@ export default function LocationInputAndFavoritesLink({
   };
 
   const handleOnClick = () => {
-    setLocation({
-      city: validatedCityState.city,
-      state: [validatedCityState.state],
-    });
+    if (validatedCityState) {
+      setLocation({
+        city: validatedCityState.city,
+        state: [validatedCityState.state],
+      });
+    }
+  };
+
+  const handleClearSearch = () => {
+    setLocation(null);
+    setZipCodes([]);
+    setSelectedBreed("");
+    getAgeMin(null);
+    getAgeMax(null);
+    setInputValue("");
+    setDebouncedValue("");
+    setValidatedCityState(null);
   };
 
   useEffect(() => {
@@ -70,6 +91,15 @@ export default function LocationInputAndFavoritesLink({
             onClick={handleOnClick}
           >
             Search
+          </Button>
+
+          {/* Clear Button*/}
+          <Button
+            variant={"outline"}
+            className="h-10 md:h-14 text-base w-full md:w-[30%] lg:w-[150px] xl:w-[200px] border-purple-200 border-2 bg-purple-200 text-purple-900 rounded-md hover:bg-purple-900 hover:text-white cursor-pointer"
+            onClick={handleClearSearch}
+          >
+            Clear Search
           </Button>
         </div>
 

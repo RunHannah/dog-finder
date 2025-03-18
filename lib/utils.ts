@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function cleanCityState(input: string): ValidatedCityStateType {
+export function cleanCityState(input: string): ValidatedCityStateType | null {
   // If the user cleared the input field
   if (input.length === 0) return { city: "", state: "" };
 
@@ -25,5 +25,5 @@ export function cleanCityState(input: string): ValidatedCityStateType {
   }
 
   // If city and state are not valid, then return all the results
-  return { city: "", state: "" };
+  return null;
 }

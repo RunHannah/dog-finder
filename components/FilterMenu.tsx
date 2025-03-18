@@ -13,6 +13,9 @@ import {
 
 interface FilterMenuProps {
   breeds: string[];
+  selectedBreed: string;
+  ageMin: number | null;
+  ageMax: number | null;
   setSelectedBreed: (value: string) => void;
   getAgeMin: (value: number | null) => void;
   getAgeMax: (value: number | null) => void;
@@ -20,6 +23,9 @@ interface FilterMenuProps {
 
 export default function FilterMenu({
   breeds,
+  selectedBreed,
+  ageMin,
+  ageMax,
   setSelectedBreed,
   getAgeMin,
   getAgeMax,
@@ -51,9 +57,14 @@ export default function FilterMenu({
         <Select onValueChange={(value) => setSelectedBreed(value)}>
           <SelectTrigger
             aria-label="Select a breed"
-            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
+            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] text-gray-500 cursor-pointer"
           >
-            <SelectValue placeholder="Choose a breed" />
+            <SelectValue
+              placeholder="Choose a breed"
+              className="placeholder-gray-500"
+            >
+              {selectedBreed || "Choose a breed"}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -74,9 +85,14 @@ export default function FilterMenu({
         <Select onValueChange={(value) => handleAgeFilter(value, "ageMin")}>
           <SelectTrigger
             aria-label="Select minimum age"
-            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
+            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] text-gray-500 cursor-pointer"
           >
-            <SelectValue placeholder="Choose a min age" />
+            <SelectValue
+              placeholder="Choose a min age"
+              className="placeholder-gray-500"
+            >
+              {ageMin !== null ? `${ageMin} years` : "Choose a min age"}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -96,9 +112,14 @@ export default function FilterMenu({
         <Select onValueChange={(value) => handleAgeFilter(value, "ageMax")}>
           <SelectTrigger
             aria-label="Select maximum age"
-            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
+            className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] text-gray-500 cursor-pointer"
           >
-            <SelectValue placeholder="Choose a max age" />
+            <SelectValue
+              placeholder="Choose a max age"
+              className="placeholder-gray-500"
+            >
+              {ageMax !== null ? `${ageMax} years` : "Choose a max age"}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>

@@ -30,7 +30,7 @@ export default function SortMenu({
       <Select onValueChange={(value: string) => handleCategoryChange(value)}>
         <SelectTrigger
           aria-label="Sort by"
-          className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] cursor-pointer"
+          className="w-[190px] border-2 border-purple-950 m-2 text-sm md:text-base h-[35px] md:h-[55px] text-gray-500 cursor-pointer"
         >
           <SelectValue placeholder="Sort by" />
         </SelectTrigger>
