@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Button } from "./ui/button";
 import { cleanCityState } from "@/lib/utils";
 import { CityStateType } from "@/types/Search";
-import Link from "next/link";
+import CustomButton from "./CustomButton";
 
 interface LocationInputAndFavoritesLinkProps {
   setLocation: (location: CityStateType | null) => void;
@@ -85,31 +84,29 @@ export default function LocationInputAndFavoritesLink({
           />
 
           {/* Search Button */}
-          <Button
-            variant={"outline"}
-            className="h-10 md:h-14 text-base w-full md:w-[30%] lg:w-[150px] xl:w-[200px] border-purple-200 border-2 bg-purple-200 text-purple-900 rounded-md hover:bg-purple-900 hover:text-white cursor-pointer"
+          <CustomButton
+            className="border-purple-200 bg-purple-200 text-purple-900 hover:bg-purple-900 hover:text-white"
             onClick={handleOnClick}
           >
             Search
-          </Button>
+          </CustomButton>
 
           {/* Clear Button*/}
-          <Button
-            variant={"outline"}
-            className="h-10 md:h-14 text-base w-full md:w-[30%] lg:w-[150px] xl:w-[200px] border-purple-200 border-2 bg-purple-200 text-purple-900 rounded-md hover:bg-purple-900 hover:text-white cursor-pointer"
+          <CustomButton
+            className="border-purple-200 bg-purple-200 text-purple-900 hover:bg-purple-900 hover:text-white"
             onClick={handleClearSearch}
           >
             Clear Search
-          </Button>
+          </CustomButton>
         </div>
 
         {/* Link to favorites */}
-        <Link
-          className="mt-2 md:mt-0 h-10 md:h-14 w-full md:w-[30%] lg:w-[150px] xl:w-[200px] text-center border-purple-200 border-2 bg-purple-200 text-purple-900 text-base hover:text-white hover:bg-purple-900 cursor-pointer rounded-md flex justify-center items-center md:ml-4"
+        <CustomButton
+          className="mt-2 md:mt-0 text-center border-purple-200 bg-purple-200 text-purple-900 hover:text-white hover:bg-purple-900 flex justify-center items-center md:ml-4"
           href="/favorites"
         >
           See your favorites
-        </Link>
+        </CustomButton>
       </div>
     </div>
   );
