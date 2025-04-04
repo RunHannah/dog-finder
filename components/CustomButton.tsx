@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
-interface StyledButtonProps {
+interface CustomButtonProps {
   className?: string;
   children: React.ReactNode;
   href?: string;
@@ -14,7 +14,7 @@ export default function CustomButton({
   children,
   href,
   onClick,
-}: StyledButtonProps) {
+}: CustomButtonProps) {
   // Handle the case when href is provided
   if (href) {
     return (
